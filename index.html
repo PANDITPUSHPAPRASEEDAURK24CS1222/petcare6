@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawCare - Pet Care Website</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff8fb;
+    color: #333;
+    transition: background-color 1s;
+}
+
+header {
+    background: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px #00000015;
+}
+
+.logo {
+    color: #e85d8f;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #e85d8f;
+}
+
+.hero {
+    text-align: center;
+    padding: 55px 20px;
+    background: #fff0f6;
+}
+
+.hero h1 {
+    color: #e85d8f;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    line-height: 1.8;
+}
+
+section {
+    padding: 35px 8%;
+}
+
+.section-title {
+    text-align: center;
+    color: #e85d8f;
+    margin-bottom: 25px;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.activity-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px #00000010;
+}
+
+.activity-card h3 {
+    color: #e85d8f;
+    margin-bottom: 15px;
+}
+
+.activity-card p {
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+button {
+    background: #e85d8f;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin: 5px 3px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d94779;
+}
+
+.result {
+    margin-top: 15px;
+    padding: 12px;
+    background: #fff0f6;
+    border-radius: 8px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+#time {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e85d8f;
+}
+
+#hoverText {
+    transition: font-size 0.2s;
+}
+
+#movingArea {
+    position: relative;
+    height: 110px;
+    background: #fff0f6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#petImage {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    font-size: 55px;
+}
+
+footer {
+    background: #e85d8f;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    line-height: 1.8;
+    margin-top: 25px;
+}
+
+@media (max-width: 700px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🐾 PawCare</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#activities">Activities</a>
+        <a href="#pets">Pets</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>Welcome to PawCare!</h1>
+    <p>Your pet's health, happiness and care are our priority.</p>
+    <p>Current Time: <span id="time">00:00:00</span></p>
+</section>
+
+<section id="activities">
+    <h2 class="section-title">PawCare Interactive Activities</h2>
+
+    <div class="activity-grid">
+
+        <!-- 1. Digital Clock -->
+        <div class="activity-card">
+            <h3>1. Digital Clock</h3>
+            <p>Displays the current time and updates every second.</p>
+            <div class="result" id="clockResult">
+                Current time appears above.
+            </div>
+        </div>
+
+        <!-- 2. Background Colour -->
+        <div class="activity-card">
+            <h3>2. Dynamic Background Colour</h3>
+            <p>The background colour changes automatically every 30 seconds.</p>
+            <button onclick="setBackgroundColor()">Change Colour Now</button>
+            <button onclick="stopColorChange()">Stop Colour Change</button>
+            <div class="result" id="colorResult">
+                Background colour is active.
+            </div>
+        </div>
+
+        <!-- 3. Mouse Events -->
+        <div class="activity-card">
+            <h3>3. Pet Care Mouse Events</h3>
+            <p id="hoverText"
+               onmouseover="increaseFont()"
+               onmouseout="restoreFont()">
+                Hover over this paragraph to enlarge the pet-care information.
+                Move the mouse away to restore its original size.
+            </p>
+            <div class="result">
+                Events: onmouseover and onmouseout
+            </div>
+        </div>
+
+        <!-- 4. Moving Image -->
+        <div class="activity-card">
+            <h3>4. Moving Pet Image</h3>
+            <p>Click Move to move the pet and Stop to stop it.</p>
+            <div id="movingArea">
+                <div id="petImage">🐶</div>
+            </div>
+            <button onclick="startMoving()">Move</button>
+            <button onclick="stopMoving()">Stop</button>
+        </div>
+
+        <!-- 5. Class and Object -->
+        <div class="activity-card">
+            <h3>5. Pet Class and Object</h3>
+            <p>Create a pet object using a JavaScript class.</p>
+            <button onclick="showPet()">Display Pet Details</button>
+            <div class="result" id="petResult">
+                Pet details will appear here.
+            </div>
+        </div>
+
+        <!-- 6. Array of Objects -->
+        <div class="activity-card">
+            <h3>6. Array of Pet Objects</h3>
+            <p>Display pet information and categorize pets by age.</p>
+            <button onclick="showPets()">Display All Pets</button>
+            <div class="result" id="petsResult">
+                Pet records will appear here.
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="pets">
+    <h2 class="section-title">Our Lovely Pets</h2>
+    <div class="activity-grid">
+        <div class="activity-card">
+            <h3>🐶 Buddy</h3>
+            <p>Golden Retriever - 2 years old</p>
+        </div>
+        <div class="activity-card">
+            <h3>🐱 Luna</h3>
+            <p>Persian Cat - 1 year old</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p><strong>PawCare Pet Care & Veterinary Services</strong></p>
+    <p>Caring for pets with love, trust and compassion.</p>
+    <p>© 2026 PawCare. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// 1. DIGITAL CLOCK
+
+function displayTime() {
+    var d = new Date();
+
+    var hour = String(d.getHours()).padStart(2, "0");
+    var minute = String(d.getMinutes()).padStart(2, "0");
+    var second = String(d.getSeconds()).padStart(2, "0");
+
+    document.getElementById("time").innerHTML =
+        hour + ":" + minute + ":" + second;
+}
+
+displayTime();
+setInterval(displayTime, 1000);
+
+
+// 2. DYNAMIC BACKGROUND COLOUR
+
+function setBackgroundColor() {
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+
+    document.body.style.backgroundColor = color;
+
+    document.getElementById("colorResult").innerHTML =
+        "Current background colour: " + color;
+}
+
+var colorTimer = setInterval(setBackgroundColor, 30000);
+
+function stopColorChange() {
+    clearInterval(colorTimer);
+
+    document.getElementById("colorResult").innerHTML =
+        "Automatic colour changes stopped.";
+}
+
+
+// 3. MOUSE EVENTS
+
+function increaseFont() {
+    document.getElementById("hoverText").style.fontSize = "22px";
+}
+
+function restoreFont() {
+    document.getElementById("hoverText").style.fontSize = "16px";
+}
+
+
+// 4. MOVE AND STOP PET IMAGE
+
+var animate;
+var imgObj = document.getElementById("petImage");
+var movingArea = document.getElementById("movingArea");
+
+function moveRight() {
+    var currentLeft = parseInt(imgObj.style.left) || 0;
+    var maxLeft = movingArea.clientWidth - imgObj.offsetWidth;
+
+    if (currentLeft >= maxLeft) {
+        imgObj.style.left = "0px";
+    } else {
+        imgObj.style.left = (currentLeft + 1) + "px";
+    }
+
+    animate = setTimeout(moveRight, 10);
+}
+
+function startMoving() {
+    clearTimeout(animate);
+    moveRight();
+}
+
+function stopMoving() {
+    clearTimeout(animate);
+}
+
+
+// 5. CLASS AND OBJECT
+
+class Pet {
+    constructor(name, breed, age) {
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
+    }
+
+    present() {
+        return "Name: " + this.name +
+            ", Breed: " + this.breed +
+            ", Age: " + this.age + " years";
+    }
+}
+
+var myPet = new Pet("Buddy", "Golden Retriever", 2);
+
+function showPet() {
+    document.getElementById("petResult").innerHTML =
+        myPet.present();
+}
+
+
+// 6. ARRAY OF PET OBJECTS
+
+var pets = [
+    { name: "Buddy", breed: "Golden Retriever", age: 2 },
+    { name: "Luna", breed: "Persian Cat", age: 1 },
+    { name: "Coco", breed: "Rabbit", age: 4 },
+    { name: "Max", breed: "Labrador", age: 5 }
+];
+
+function showPets() {
+    var output = "";
+
+    for (var i = 0; i < pets.length; i++) {
+        var category = pets[i].age < 3
+            ? "Young Pet"
+            : "Adult Pet";
+
+        output += pets[i].name + " - " +
+            pets[i].breed + " - " +
+            pets[i].age + " years - " +
+            category + "<br>";
+    }
+
+    document.getElementById("petsResult").innerHTML = output;
+}
+
+</script>
+
+</body>
+</html>
